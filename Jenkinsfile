@@ -3,15 +3,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/saiteja9027-debug/first-proj.git'
-            }
-        }
-
         stage('Build') {
             steps {
+                sh 'pwd'
+                sh 'ls -la'
                 sh 'mvn clean package'
             }
         }
