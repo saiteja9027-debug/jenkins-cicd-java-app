@@ -12,25 +12,24 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Build stage started'
-                sh 'ls -la'
-                sh 'cat README.md'
+                sh 'mvn clean package'
             }
         }
 
-        stage('Test') {
+        stage('Verify Artifact') {
             steps {
-                echo 'Test stage completed'
+                sh 'ls -lh target/'
+                sh 'test -f target/jenkins-cicd-java-app-1.0.0.jar'
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Java application built successfully!'
         }
         failure {
-            echo 'Pipeline failed. Check the console output.'
+            echo 'Build failed. Check Console Output.'
         }
     }
 }
